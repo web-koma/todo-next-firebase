@@ -7,7 +7,7 @@ import {
     toggleTodoInFirestore,
     removeTodoFromFirestore,
 } from "@/lib/firebaseFunctions";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { signInWithPopup, signOut, User } from "firebase/auth"; // FirebaseのUser型をインポート
 import { auth, googleProvider } from "@/firebaseConfig";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -20,7 +20,7 @@ interface Todo {
 export default function Home() {
     const [todos, setTodos] = useState<Todo[]>([]);
     const [newTodo, setNewTodo] = useState<string>(""); 
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<User | null>(null); // User型を指定
 
     // FirestoreからユーザーごとのTodoをリアルタイム取得
     useEffect(() => {
